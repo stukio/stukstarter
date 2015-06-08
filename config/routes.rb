@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
   resources :projects do
     resources :rewards, only: [:new, :create, :edit, :update, :destroy]
+    resources :pledges
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
