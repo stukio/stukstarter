@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 
+  name: MyString
+  short_description: MyText
+  description: MyText
+  image_url: MyString
+  status: 
+  goal: 
+  goal: 
+  expiration_date: 2015-06-08 15:15:29
+
+two:
+  user_id: 
+  name: MyString
+  short_description: MyText
+  description: MyText
+  image_url: MyString
+  status: 
+  goal: 
+  goal: 
+  expiration_date: 2015-06-08 15:15:29
