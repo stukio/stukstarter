@@ -7,7 +7,8 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<%= render 'general/header' %>	
+	<%= render 'general/header' %>
+	<%= flash_messages %>
 	<%= yield %>
 </body>
 </html>
