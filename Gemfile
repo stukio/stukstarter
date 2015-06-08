@@ -27,7 +27,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # Annotate to annotate columns
 gem 'annotate'
-
+# Simple form
+gem 'simple_form'
+# Bootstrap WYSIWYG
+gem 'bootstrap-wysihtml5-rails', github: 'nerian/bootstrap-wysihtml5-rails'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

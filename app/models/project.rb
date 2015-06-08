@@ -16,5 +16,14 @@
 #
 
 class Project < ActiveRecord::Base
-  belongs_to :user
+  	belongs_to :user
+
+  	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true
+  	before_validation :start_project, :on => :create
+
+  	private
+
+  	def start_project
+		self.expiration_date = 1.month.from_now
+	end
 end
