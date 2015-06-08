@@ -11,98 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604102340) do
-
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
-  create_table "delayed_jobs", force: :cascade do |t|
-    t.integer  "priority",   default: 0, null: false
-    t.integer  "attempts",   default: 0, null: false
-    t.text     "handler",                null: false
-    t.text     "last_error"
-    t.datetime "run_at"
-    t.datetime "locked_at"
-    t.datetime "failed_at"
-    t.string   "locked_by"
-    t.string   "queue"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
-
-  create_table "orders", force: :cascade do |t|
-    t.integer  "user_pledge_id"
-    t.integer  "amount"
-    t.decimal  "shipping"
-    t.date     "expiration_date"
-    t.integer  "number"
-    t.string   "uuid"
-    t.string   "token"
-    t.string   "name"
-    t.string   "address"
-    t.string   "city"
-    t.string   "country"
-    t.string   "postal_code"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-  end
-
-  add_index "orders", ["user_pledge_id"], name: "index_orders_on_user_pledge_id", using: :btree
-
-  create_table "projects", force: :cascade do |t|
-    t.integer  "user_id"
-    t.string   "name"
-    t.string   "short_description"
-    t.text     "description"
-    t.string   "image_url"
-    t.datetime "expiration_date"
-    t.string   "status",                                    default: "pending"
-    t.datetime "created_at",                                                    null: false
-    t.datetime "updated_at",                                                    null: false
-    t.decimal  "goal",              precision: 8, scale: 2
-    t.string   "slug"
-  end
-
-  add_index "projects", ["slug"], name: "index_projects_on_slug", unique: true, using: :btree
-  add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
-
-  create_table "rewards", force: :cascade do |t|
-    t.string   "name"
-    t.text     "description"
-    t.integer  "value"
-    t.integer  "number_available"
-    t.date     "estimated_delivery"
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.integer  "project_id"
-    t.decimal  "shipping",           precision: 8, scale: 2
-  end
-
-  add_index "rewards", ["project_id"], name: "index_rewards_on_project_id", using: :btree
-
-  create_table "user_pledges", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "reward_id"
-    t.datetime "created_at",                                                  null: false
-    t.datetime "updated_at",                                                  null: false
-    t.integer  "amount"
-    t.decimal  "shipping",        precision: 8, scale: 2
-    t.date     "expiration_date"
-    t.integer  "number"
-    t.string   "uuid"
-    t.string   "token"
-    t.string   "name"
-    t.string   "address"
-    t.string   "city"
-    t.string   "country"
-    t.string   "postal_code"
-    t.string   "status",                                  default: "pending"
-  end
-
-  add_index "user_pledges", ["reward_id"], name: "index_user_pledges_on_reward_id", using: :btree
-  add_index "user_pledges", ["user_id"], name: "index_user_pledges_on_user_id", using: :btree
+ActiveRecord::Schema.define(version: 20150608140857) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -113,19 +22,13 @@ ActiveRecord::Schema.define(version: 20150604102340) do
     t.integer  "sign_in_count",          default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
-    t.inet     "current_sign_in_ip"
-    t.inet     "last_sign_in_ip"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "customer_id"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["email"], name: "index_users_on_email", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
-  add_foreign_key "orders", "user_pledges"
-  add_foreign_key "projects", "users"
-  add_foreign_key "rewards", "projects"
-  add_foreign_key "user_pledges", "rewards"
-  add_foreign_key "user_pledges", "users"
 end
