@@ -33,7 +33,7 @@ class Project < ActiveRecord::Base
 
     def funding_percentage
       backed = total_backed_amount
-      backed.zero? ? 0 : (goal/backed).to_f.round
+      backed.zero? ? 0 : (backed/goal*100).to_f.round
     end
 
     def days_to_go
