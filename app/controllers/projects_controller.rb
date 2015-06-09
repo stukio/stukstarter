@@ -8,6 +8,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index    
     @projects = Project.all
+    @displayed_projects = @projects.take(4)
   end
 
   # GET /projects/1
