@@ -1,8 +1,8 @@
-class ProjectsController < ApplicationController
-  load_and_authorize_resource
+class ProjectsController < ApplicationController  
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-  before_action :set_pledges, only: [:show]  
+  before_action :set_pledges, only: [:show] 
+  load_and_authorize_resource
 
   # GET /projects
   # GET /projects.json
