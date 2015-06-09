@@ -1,3 +1,9 @@
+<% if can? :manage, reward %>
+	<div class="text-right">
+		<%= link_to 'Edit', edit_project_reward_path(@project,reward) %> | 
+		<%= link_to 'Delete', project_reward_path(@project,reward), method: :delete, data: {confirm: "Are you sure?"} %>
+	</div>
+<% end %>
 <%= link_to new_project_pledge_path(@project,reward_id:reward.id), class: "reward" do %>
 	<div class="reward-box">
 		<p class="pledge">Pledge $<%= reward.value %> or more</p>

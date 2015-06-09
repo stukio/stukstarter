@@ -1,11 +1,12 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  load_and_authorize_resource
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :set_pledges, only: [:show]
+  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_pledges, only: [:show]  
 
   # GET /projects
   # GET /projects.json
-  def index
+  def index    
     @projects = Project.all
   end
 
@@ -28,7 +29,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = current_user.projects.build(project_params)
 
     respond_to do |format|
       if @project.save
