@@ -16,7 +16,10 @@
 #
 
 class Project < ActiveRecord::Base
-  	belongs_to :user
+  	extend FriendlyId
+    friendly_id :slug_candidates, use: :slugged
+
+    belongs_to :user
   	has_many :rewards
 
   	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true
@@ -78,5 +81,12 @@ class Project < ActiveRecord::Base
 
     def void_pledges
       self.pledges.each {|p| p.void!}
+    end
+
+    def slug_candidates
+      [
+        :name,
+        [:name, :created_at]
+      ]
     end
 end
