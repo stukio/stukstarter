@@ -21,6 +21,7 @@ class Project < ActiveRecord::Base
 
   	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true
   	before_validation :start_project, :on => :create
+    before_validation :charge_backers_if_funded, :on => :create
 
   	def pledges
   		rewards.flat_map(&:pledges)
@@ -39,9 +40,43 @@ class Project < ActiveRecord::Base
       (self.expiration_date.to_date - Date.today).to_i
     end
 
+    def funded?
+      status == "funded"
+    end
+
+    def expired?
+      status == "expired"
+    end
+
+    def canceled?
+      status == "canceled"
+    end
+
+    def funded!
+      update(status:"funded")
+    end
+
+    def expired!
+      update(status:"expired")
+      void_pledges
+    end
+
+    def canceled!
+      update(status:"canceled")
+      void_pledges
+    end
+
   	private
 
   	def start_project
   		self.expiration_date = 1.month.from_now
   	end    
+
+    def charge_backers_if_funded
+      ChargeBackersJob.set(wait_until: self.expiration_date).perform_later self.id
+    end
+
+    def void_pledges
+      self.pledges.each {|p| p.void!}
+    end
 end

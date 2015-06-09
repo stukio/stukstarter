@@ -3,8 +3,6 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
 # Use SCSS for stylesheets and Boostrap frontend framework
 gem 'bootstrap-sass', '~> 3.3.4'
 gem 'sass-rails', '~> 5.0'
@@ -39,6 +37,12 @@ gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: '
 gem 'font-awesome-sass', '~> 4.3.0'
 # Cancancan for authorization
 gem 'cancancan', '~> 1.10'
+# Braintree for later charges
+gem 'braintree'
+# Delayed Job to Charge funded projects
+gem 'delayed_job', '~> 4.0.6'
+gem 'delayed_job_active_record'
+gem "delayed_job_web"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -57,6 +61,12 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+
+  # Load environment variables from .env in development
+  gem 'dotenv-rails'
 end
 
 group :production do

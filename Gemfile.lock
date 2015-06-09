@@ -72,6 +72,8 @@ GEM
     bootstrap-sass (3.3.4.1)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
+    braintree (2.45.0)
+      builder (>= 2.0.0)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -87,6 +89,15 @@ GEM
     date_validator (0.8.0)
       activemodel
     debug_inspector (0.0.2)
+    delayed_job (4.0.6)
+      activesupport (>= 3.0, < 5.0)
+    delayed_job_active_record (4.0.3)
+      activerecord (>= 3.0, < 5.0)
+      delayed_job (>= 3.0, < 4.1)
+    delayed_job_web (1.2.10)
+      activerecord (> 3.0.0)
+      delayed_job (> 2.0.3)
+      sinatra (>= 1.4.4)
     devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -94,6 +105,9 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    dotenv (2.0.1)
+    dotenv-rails (2.0.1)
+      dotenv (= 2.0.1)
     erubis (2.7.0)
     execjs (2.5.2)
     font-awesome-sass (4.3.2.1)
@@ -123,6 +137,8 @@ GEM
     orm_adapter (0.5.0)
     pg (0.18.2)
     rack (1.6.1)
+    rack-protection (1.5.3)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.1)
@@ -168,6 +184,10 @@ GEM
     simple_form (3.1.0)
       actionpack (~> 4.0)
       activemodel (~> 4.0)
+    sinatra (1.4.6)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (>= 1.3, < 3)
     spring (1.3.6)
     sprockets (3.2.0)
       rack (~> 1.0)
@@ -205,12 +225,17 @@ DEPENDENCIES
   annotate
   bootstrap-sass (~> 3.3.4)
   bootstrap-wysihtml5-rails!
+  braintree
   byebug
   cancancan (~> 1.10)
   coffee-rails (~> 4.1.0)
   date_validator
   datetimepicker-rails!
+  delayed_job (~> 4.0.6)
+  delayed_job_active_record
+  delayed_job_web
   devise
+  dotenv-rails
   font-awesome-sass (~> 4.3.0)
   jbuilder (~> 2.0)
   jquery-rails
