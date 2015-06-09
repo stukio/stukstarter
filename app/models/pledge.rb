@@ -47,7 +47,7 @@ class Pledge < ActiveRecord::Base
         self.charged!
         # TODO Send email to Customer informing that the shipment is ongoing
       else
-        self.failed!
+        self.void!
         # TODO Send email to Customer informing that the payment has failed
       end
     end
@@ -69,8 +69,8 @@ class Pledge < ActiveRecord::Base
     update(status:"charged")
   end
 
-  def failed!
-    update(status:"failed")
+  def void!
+    update(status:"void")
   end
 
   private
