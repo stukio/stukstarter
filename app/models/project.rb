@@ -22,6 +22,10 @@ class Project < ActiveRecord::Base
   	validates :name, :short_description, :description, :image_url, :expiration_date, :goal, presence: true
   	before_validation :start_project, :on => :create
 
+  	def pledges
+		rewards.flat_map(&:pledges)
+	end
+
   	private
 
   	def start_project
