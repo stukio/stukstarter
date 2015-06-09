@@ -23,12 +23,25 @@ class Project < ActiveRecord::Base
   	before_validation :start_project, :on => :create
 
   	def pledges
-		rewards.flat_map(&:pledges)
-	end
+  		rewards.flat_map(&:pledges)
+  	end
+
+    def total_backed_amount
+      pledges.map(&:amount).inject(0, :+)
+    end
+
+    def funding_percentage
+      backed = total_backed_amount
+      backed.zero? ? 0 : (goal/backed).to_f.round
+    end
+
+    def days_to_go
+      (self.expiration_date.to_date - Date.today).to_i
+    end
 
   	private
 
   	def start_project
-		self.expiration_date = 1.month.from_now
-	end
+  		self.expiration_date = 1.month.from_now
+  	end    
 end
