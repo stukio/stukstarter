@@ -1,10 +1,18 @@
-<%= render "carousel", projects: @displayed_projects %>
+<% if @displayed_projects.any? %>
+	<%= render "carousel", projects: @displayed_projects %>
 
-<div class="container">
-  <br><br><br>
-  <h3 class="project-subtitle">Our fake projects</h3>
+	<div class="container">
+	  <br><br><br>
+	  <h3 class="project-subtitle">Our fake projects</h3>
 
-  <div class="row">
-    <%= render @projects %>
-  </div>
-</div>
+	  <div class="row">
+	    <%= render @projects %>
+	  </div>
+	</div>
+<% else %>
+	<div class="container text-center">
+		<br><br><br>
+		<h2>Create your first fake project</h2>
+		<%= link_to "Start project", new_project_path, class: "btn btn-success btn-lg" %>
+	</div>
+<% end %>

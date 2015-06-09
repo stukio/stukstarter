@@ -4,19 +4,19 @@ class PledgesController < ApplicationController
 	before_action :set_reward
 
 	def index
-    authorize! :manage, @project
+    	authorize! :manage, @project
 		@pledges = @project.pledges
-    respond_to do |format|
-      format.html
-    end
+	    respond_to do |format|
+	      format.html
+	    end
 	end
 
 	def new
 		@pledge = current_user.pledges.build
 		@rewards = @project.rewards
 		respond_to do |format|
-      format.html
-    end
+	      format.html
+	    end
 	end
 
 	private
